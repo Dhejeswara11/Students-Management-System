@@ -1,0 +1,55 @@
+{% extends 'Home.html' %}
+{% load static%}
+{% block content %}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/stockList.css' %}">
+</head>
+<body>
+<div class="container">
+    <table class="table table-bordered table-striped table-hover ">
+    <thead class="table-dark">
+        <tr>
+            <th class="text-light">Id</th>
+            <th class="text-light">Name</th>
+            <th class="text-light">Price</th>
+          <th class="text-light">Quantity</th>
+            <th class="text-light">Category</th>
+            <th class="text-light">Date Created</th>
+            <th class="text-light">Actions</th>
+        </tr>
+    </thead>
+        <tbody class="table-light">
+                {% for item in stockList %}
+                <tr class="table-active">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.quantity}}</td>
+                    <td>{{item.categoryId.categoryName}}</td>
+                    <td>{{item.createdDateTime}}</td>
+                    <td>
+                        <div class="d-flex">
+                             
+                            <form method="GET" action="{% url 'edit stock' item.id %}">
+                                {% csrf_token %}
+                                <button class="btn btn-warning me-3" type="submit">
+                                    ✎ Edit
+                                </button>
+                            </form>
+                            <form method="POST" action="{% url 'delete stock' item.id %}">
+                                {% csrf_token %}
+                                <button class="btn btn-danger" type="submit" >
+                                    ⛔ Delete
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</div>
+</body>
+{% endblock %}

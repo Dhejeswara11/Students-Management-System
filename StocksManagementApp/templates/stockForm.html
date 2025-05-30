@@ -1,0 +1,33 @@
+{% extends "Home.html" %}
+{% load static %}
+
+{% block content %}
+
+<head>
+<link rel="stylesheet" type="text/css" href="{% static 'css/stockForm.css' %}">
+</head>
+<body>
+    
+<div class="container mt-3 form-container">
+    <center><h2 class="form-title"> Stock Form</h2></center>
+    <form action="" method="POST">
+        {% csrf_token %}
+        
+        <label class="form-label" for="id_productName">📦Enter Product Name</label>
+        {{ form.name }}
+        
+        <label class="form-label" for="id_price"> 💲Enter Price</label>
+        {{ form.price }}
+        
+        <label class="form-label" for="id_quantity">🔢Enter Quantity</label>
+        {{ form.quantity }}
+        
+        <label class="form-label" for="id_categoryId">🔖Enter Category</label>
+        {{ form.categoryId }}
+        
+        <input class="btn btn-info mt-3" type="submit"/>
+    </form>
+</div>
+{% endblock %}
+</body>
+
